@@ -1,0 +1,108 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Documentation e.g. User Registration Test scenario with verification, valid and invalid credentials.
+
+Documentation	Testing the Registration functionality. Verification scenario with valid and invalid credentials.
+ 
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition Open Browser
+Post Condition	Registeration Verification
+Tags Register, Ts-2-Registration
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Registration field variables
+
+RegisterUrl = https://gitlab.com/users/sign_up
+
+FirstName= XYZ
+LastName= XYZ
+UserName= XYZ
+Email= XZY@XYZ
+Password= ***
+recaptcha_Verification = Valid
+
+Invalid_Username= XYZZZ
+Invalid_Email= XYZZZ
+Invalid_Password= ******
+Invalid_recaptcha_Verification= Invalid
+Empty=
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+# TODO: Write Positive and Negative Test Cases and Test Process steps (Think about possible test cases)
+
+#Positive Test
+
+Registration with Valid credentials
+	Navigate to Register Page RegisterUrl
+	Input FirstName  FirstName
+	Input LastName  LastName
+	Input Username  UserName
+	Input Email  Email
+	Input Password  Password
+	Input recaptcha_Verification   recaptcha_Verification
+	Submit Registration  Form
+	Verify Page Should Contain  Verification page
+
+
+#Negative Test
+
+Registration with Invalid Credentials
+	Navigate to Register Page  RegisterUrl
+	Input FirstName  FirstName
+	Input LastName  LastName
+	Input Username  UserName
+	Input Email  Invalid_Email
+	Input Password  Password
+	Submit Registration Form
+	Verify Page Should Contain Invalid UserName and Email
+
+
+Error message Should Be Visible After Invalid Registeration with Empty And Space
+	Navigate to Register Page  RegisterUrl
+	Input FirstName  Empty
+	Input LastName  Empty
+	Input Username  Empty
+	Input Email  Empty
+	Input Password  Empty
+	Submit Registration  Form
+	Verify Error message should show This field is required
+
+Error message Should Be Visible After Invalid Registeration with Valid FirstName, LastName, UserName, Email ,Password and Invalid recaptcha Verification
+	Navigate to Register Page  RegisterUrl
+	Input FirstName  FirstName
+	Input LastName  LastName
+	Input Username  UserName
+	Input Email  Email
+	Input Password  Password
+	Input recaptcha_Verification  Invalid_recaptcha_Verification
+	Submit Registration  Form
+	Verify Page Should Contain Invalid  Registeration or recaptcha Verification
+
+
+Error message Should Be Visible After Invalid Registeration with Valid FirstName, LastName, Email, Password, recaptcha and invalid UserName
+	Navigate to Register Page RegisterUrl
+	Input FirstName  FirstName
+	Input LastName  LastName
+	Input Username  Invalid_Username
+	Input Email  Email
+	Input Password  Password
+	Input recaptcha_Verification  recaptcha_Verification
+	Submit Registration  Form
+	Verify Page Should  Contain Invalid Registeration or UserName
+
+
+	
+
+
+

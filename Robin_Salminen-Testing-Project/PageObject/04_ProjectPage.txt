@@ -1,0 +1,107 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+Documentation	Testing the Project scenarios, CRUD Operation: Create, Read, Update, Delete
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition Open Browser Create New project  
+Post Condition Successfull CRUID Operation
+Tags Project Page, Ts-3-Project-Page
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Project creation field variables
+
+NewProjectUrl = https://gitlab.com/projects/new
+BlankProjectUrl = https://gitlab.com/projects/new#blank_project
+TemplateUrl = https://gitlab.com/projects/new#create_from_template
+ProjectsUrl = https://gitlab.com/dashboard/projects
+ProjectUrl = https://gitlab.com/"ProjectUrl"/"ProjectName" 
+
+ProjectName = XYZ
+ProjectTemplate = XYZ
+ProjectUrl = XYZ
+ProjectDescription = XYZ
+ProjectDeployment = Valid
+ProjectDelete = Valid
+VisibilityPublic = Valid
+VisibilityPrivate = Valid
+
+Invalid_ProjectName = XYZZZ
+Invalid_ProjectTemplate = XYZZZ
+Invalid_ProjectUrl = XYZZZ
+Invalid_PojectDelete = Invalid
+Empty =
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+#Positive Test
+
+Create a new blank project
+	Navigate to New project page     NewProjectUrl
+	Navigate to blank project page   BlankProjectUrl
+	Input ProjectName  ProjectName
+	Input ProjectUrl  ProjectUrl
+	Input ProjectDeployment  ProjectDeployment
+	Input VisibilityPrivate  VisibilityPrivate
+	Submit   Create a new Blank Project
+	New Project page should contain the new created project and Successfull creation message
+
+
+Create a new project from template
+	Navigate to New project page   NewProjectUrl
+	Navigate to create from template page  TemplateUrl
+	Input ProjectName   ProjectName
+	Input ProjectUrl   ProjectUrl
+	Input ProjectDescription   ProjectDescription
+	Input VisibilityPrivate   VisibilityPrivate
+	Submit   Create a new project from template
+	New Project page should contain the new created project and successfull import message
+
+
+Delete existing template project
+	Navigate to projects dashboard   ProjectsUrl
+	Navigate to a existing template project   ProjectUrl
+	Navigate to advanced Settings  ProjectUrl
+	Submit   Delete project
+	Input ProjectDelete   ProjectDelete
+	The deleted Project should not exist in the projects dashboard
+
+
+#Negative Test
+
+Error message Should be visible after invalid submit with previous same project name
+	Navigate to New project page   NewProjectUrl
+	Navigate to create blank project page   BlankProjectUrl
+	Input ProjectName  Invalid_ProjectName
+	Input ProjectUrl   ProjectUrl
+	Input ProjectDeployment   ProjectDeployment
+	Input VisibilityPrivate   VisibilityPrivate
+	Submit   Create a new Blank Project
+	Submit   page should contain invalid project creation or project name
+
+
+
+
+
+
+
+
+
+
+
+

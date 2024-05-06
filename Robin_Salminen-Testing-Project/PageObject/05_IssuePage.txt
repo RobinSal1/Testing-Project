@@ -1,0 +1,70 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+Documentation	Issue Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+# TODO: Write Precondition and Postcondition, Tags 
+
+Pre Condition	Pre-existing project
+Post Condition	Successfull Issue page submission
+Tags Issue, TS-4-Issue
+
+#******************* Common Variables ********************
+
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Issue creation field variables, Updated name of the issue
+
+IssuePageUrl = https://gitlab.com/group-slug-here/project-slug-here
+NewIssueUrl = https://gitlab.com/group-slug-here/project-slug-here/issues/new
+
+IssueTitle = XYZ
+NewIssueTitle = XYZ
+IssueDescription = XYZ
+
+Invalid_IssueTitle = XYZZZ
+Empty =
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive Test Cases and Test Process steps
+
+# Positive Test
+
+Create Issue
+	Navigate to issues Page   IssuePageUrl
+	Navigate to new issues   NewIssueUrl
+	Input IssueTitle   IssueTitle
+	Input IssueDescription   IssueDescription
+	Submit   Create Issue
+	The issues page should contain a the submitted issue
+
+Update name of issue
+	Navigate to a Issue Page   IssuePageUrl
+	Navigate to a existing issue   IssuePageUrl
+	Navigate to   Edit
+	Input IssueTitle   NewIssueTitle
+	Submit   Save changes
+	The existing issue should now have a new name title
+
+Second issue with a same name
+	Navigate to issues Page   IssuePageUrl
+	Navigate to new issues   NewIssueUrl
+	Input IssueTitle   IssueTitle
+	Input IssueDescription   IssueDescription
+	Submit Create Issue
+	The issues page should contain the submitted issue with a same name but a different "#" number
+
+
+Delete First issue
+	Navigate to Issue Page   IssuePageUrl
+	Navigate to first issue  IssuePageUrl
+	Navigate to more options IssuePageUrl
+	Submit   delete issue
+	The issue page should not contain the deleted first issue
